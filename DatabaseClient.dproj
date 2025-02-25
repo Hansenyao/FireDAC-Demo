@@ -133,6 +133,15 @@
         </DCCReference>
         <DCCReference Include="Book.pas"/>
         <DCCReference Include="Author.pas"/>
+        <DCCReference Include="BookForm.pas">
+            <Form>BookDlg</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="AuthorForm.pas">
+            <Form>AuthorDlg</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Common.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

@@ -64,13 +64,30 @@ object MainDlg: TMainDlg
     Height = 284
     Caption = 'Table'
     TabOrder = 7
+    object ButtonEditData: TButton
+      Left = 253
+      Top = 18
+      Width = 75
+      Height = 25
+      Caption = 'Edit'
+      TabOrder = 0
+      OnClick = ButtonEditDataClick
+    end
+    object ButtonAddData: TButton
+      Left = 334
+      Top = 18
+      Width = 75
+      Height = 25
+      Caption = 'Add'
+      TabOrder = 1
+      OnClick = ButtonAddDataClick
+    end
   end
   object DBGridTableData: TDBGrid
     Left = 8
     Top = 216
     Width = 593
     Height = 220
-    DrawingStyle = gdsGradient
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
     TabOrder = 0
     TitleFont.Charset = DEFAULT_CHARSET
@@ -128,7 +145,7 @@ object MainDlg: TMainDlg
     Height = 23
     Style = csDropDownList
     TabOrder = 6
-    OnChange = ComboBox_SelectedTableNameChange
+    OnChange = ComboBoxSelectedTableNameChange
   end
   object FDConnection: TFDConnection
     Left = 488

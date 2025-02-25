@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+  <Transactions>
+    <Transaction>2025/02/25 07:05:16.662,=C:\Projects-Delphi\FireDAC-Demo\Unit1.pas</Transaction>
+    <Transaction>2025/02/25 07:05:30.068,C:\Projects-Delphi\FireDAC-Demo\BookForm.pas=C:\Projects-Delphi\FireDAC-Demo\Unit1.pas</Transaction>
+    <Transaction>2025/02/25 07:05:30.068,C:\Projects-Delphi\FireDAC-Demo\BookForm.dfm=C:\Projects-Delphi\FireDAC-Demo\Unit1.dfm</Transaction>
+    <Transaction>2025/02/25 07:05:36.990,=C:\Projects-Delphi\FireDAC-Demo\Unit2.pas</Transaction>
+    <Transaction>2025/02/25 07:05:45.225,C:\Projects-Delphi\FireDAC-Demo\AuthorForm.dfm=C:\Projects-Delphi\FireDAC-Demo\Unit2.dfm</Transaction>
+    <Transaction>2025/02/25 07:05:45.225,C:\Projects-Delphi\FireDAC-Demo\AuthorForm.pas=C:\Projects-Delphi\FireDAC-Demo\Unit2.pas</Transaction>
+    <Transaction>2025/02/25 07:11:39.607,=C:\Projects-Delphi\FireDAC-Demo\Unit1.pas</Transaction>
+    <Transaction>2025/02/25 07:11:46.858,C:\Projects-Delphi\FireDAC-Demo\Common.pas=C:\Projects-Delphi\FireDAC-Demo\Unit1.pas</Transaction>
+  </Transactions>
+</BorlandProject>
