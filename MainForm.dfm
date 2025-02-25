@@ -59,14 +59,14 @@ object MainDlg: TMainDlg
   end
   object GroupBox1: TGroupBox
     Left = 2
-    Top = 160
+    Top = 152
     Width = 605
     Height = 284
     Caption = 'Table'
     TabOrder = 7
     object ButtonEditData: TButton
-      Left = 253
-      Top = 18
+      Left = 246
+      Top = 24
       Width = 75
       Height = 25
       Caption = 'Edit'
@@ -74,13 +74,22 @@ object MainDlg: TMainDlg
       OnClick = ButtonEditDataClick
     end
     object ButtonAddData: TButton
-      Left = 334
-      Top = 18
+      Left = 327
+      Top = 24
       Width = 75
       Height = 25
       Caption = 'Add'
       TabOrder = 1
       OnClick = ButtonAddDataClick
+    end
+    object ButtonDeleteData: TButton
+      Left = 408
+      Top = 24
+      Width = 75
+      Height = 25
+      Caption = 'Delete'
+      TabOrder = 2
+      OnClick = ButtonDeleteDataClick
     end
   end
   object DBGridTableData: TDBGrid

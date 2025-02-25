@@ -42,6 +42,7 @@ type
     GroupBox2: TGroupBox;
     ButtonEditData: TButton;
     ButtonAddData: TButton;
+    ButtonDeleteData: TButton;
     procedure ButtonConnectClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure ComboBoxSelectedTableNameChange(Sender: TObject);
@@ -49,6 +50,7 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure ButtonEditDataClick(Sender: TObject);
     procedure ButtonAddDataClick(Sender: TObject);
+    procedure ButtonDeleteDataClick(Sender: TObject);
   private
     { Private declarations }
     OSAuthent: Boolean;
@@ -58,6 +60,8 @@ type
     procedure ShowBooksUpdateDlg(Mode: TTableUpdateMode);
     procedure UpdateDataToAuthorsTable(AuthorId: Integer; Author: TAuthor);
     procedure AddDataToAuthorsTable(Author: TAuthor);
+    procedure DeleteDataFromAuthorsTable(AuthorId: Integer);
+    procedure DeleteDataFromBooksTable(ISBN: string);
   public
     { Public declarations }
   end;
@@ -86,6 +90,7 @@ begin
   EditDriverID.SetFocus();
   ButtonEditData.Enabled := false;
   ButtonAddData.Enabled := false;
+  ButtonDeleteData.Enabled := false;
 end;
 
 {Free resource when app exits}
@@ -245,6 +250,30 @@ begin
     end;
 end;
 
+{Delete the selected record from database}
+procedure TMainDlg.ButtonDeleteDataClick(Sender: TObject);
+var
+  SelectTable: string;
+begin
+  SelectTable := ComboBoxSelectedTableName.Text;
+  FDQuery.RecNo := DBGridTableData.DataSource.DataSet.RecNo;
+
+  if SelectTable = 'Authors' then
+    begin
+      var AuthorId := FDQuery.FieldByName('AuthorId').AsInteger;
+      DeleteDataFromAuthorsTable(AuthorId);
+    end
+  else if SelectTable = 'Books' then
+    begin
+      var ISBN := FDQuery.FieldByName('ISBN').AsString;
+      DeleteDataFromBooksTable(ISBN);
+    end
+  else
+    begin
+      ShowMessage('Not implement yet.');
+    end;
+end;
+
 {List all table names in the combobox}
 procedure TMainDlg.ListAllTableNames;
 var
@@ -296,11 +325,13 @@ begin
     begin
       ButtonEditData.Enabled := true;
       ButtonAddData.Enabled := true;
+      ButtonDeleteData.Enabled := true;
     end
   else
     begin
       ButtonEditData.Enabled := false;
       ButtonAddData.Enabled := false;
+      ButtonDeleteData.Enabled := false;
     end;
 end;
 
@@ -358,7 +389,7 @@ begin
   BookDlg.Free();
 end;
 
-{Edit a reocrd in table Authors}
+{Edit a reocrd in Authors table}
 procedure TMainDlg.UpdateDataToAuthorsTable(AuthorId: Integer; Author: TAuthor);
 begin
   try
@@ -393,7 +424,7 @@ begin
   ComboBoxSelectedTableNameChange(self);
 end;
 
-{Add a new reocrd into table Authors}
+{Add a new reocrd into Authors table}
 procedure TMainDlg.AddDataToAuthorsTable(Author: TAuthor);
 begin
   try
@@ -415,6 +446,56 @@ begin
     begin
       FDConnection.Rollback;
       ShowMessage('Record inserted failed: ' + E.Message);
+    end;
+  end;
+
+  // Refresh DBGrid
+  ComboBoxSelectedTableNameChange(self);
+end;
+
+{Remove a existing reocrd from Authors table}
+procedure TMainDlg.DeleteDataFromAuthorsTable(AuthorId: Integer);
+begin
+  try
+    FDQuery.SQL.Text := 'DELETE FROM Authors ' +
+                        'WHERE AuthorId = :AuthorId';
+    FDQuery.ParamByName('AuthorId').AsInteger := AuthorId;
+
+    // Submmit update to database
+    FDQuery.ExecSQL;
+    FDConnection.Commit;
+
+    ShowMessage('Record deleted successfully.');
+  except
+    on E: Exception do
+    begin
+      FDConnection.Rollback;
+      ShowMessage('Record deleted failed: ' + E.Message);
+    end;
+  end;
+
+  // Refresh DBGrid
+  ComboBoxSelectedTableNameChange(self);
+end;
+
+{Remove a existing reocrd from Books table}
+procedure TMainDlg.DeleteDataFromBooksTable(ISBN: string);
+begin
+  try
+    FDQuery.SQL.Text := 'DELETE FROM Books ' +
+                        'WHERE ISBN = :ISBN';
+    FDQuery.ParamByName('ISBN').AsString := ISBN;
+
+    // Submmit update to database
+    FDQuery.ExecSQL;
+    FDConnection.Commit;
+
+    ShowMessage('Record deleted successfully.');
+  except
+    on E: Exception do
+    begin
+      FDConnection.Rollback;
+      ShowMessage('Record deleted failed: ' + E.Message);
     end;
   end;
 
